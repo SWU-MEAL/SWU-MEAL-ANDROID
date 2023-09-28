@@ -11,6 +11,9 @@ object AndroidX {
 
     const val SPLASH_SCREEN = "androidx.core:core-splashscreen:${Versions.SPLASHSCREEN}"
     const val PAGING = "androidx.paging:paging-runtime-ktx:${Versions.PAGING_VERSION}"
+    const val NAVIGATION_FRAGMENT =
+        "androidx.navigation:navigation-fragment-ktx:${Versions.NAVIGATION_VERSION}"
+    const val NAVIGATION_UI = "androidx.navigation:navigation-ui-ktx:${Versions.NAVIGATION_VERSION}"
 }
 
 object TestDependencies {

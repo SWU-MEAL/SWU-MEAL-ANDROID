@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/navigation_week">
+
+    <fragment
+        android:id="@+id/navigation_today"
+        android:name="com.example.swubab.presentation.today.TodaySwubabFragment"
+        android:label="TodaySwubabFragment" />
+    <fragment
+        android:id="@+id/navigation_week"
+        android:name="com.example.swubab.presentation.week.WeekSwubabFragment"
+        android:label="WeekSwubabFragment" />
+    <fragment
+        android:id="@+id/navigation_mypage"
+        android:name="com.example.swubab.presentation.mypage.MypageFragment"
+        android:label="MypageFragment" />
+</navigation>
