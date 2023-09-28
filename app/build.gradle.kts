@@ -1,20 +1,26 @@
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    kotlin("android")
+    kotlin("kapt")
+    kotlin("plugin.serialization") version Versions.KOTLIN_VERSION
+    id("dagger.hilt.android.plugin")
 }
 
 android {
-    namespace = "com.example.swubab"
-    compileSdk = 33
+    namespace = AppConfig.PACKAGE_NAME
+    compileSdk = AppConfig.COMPILE_SDK
 
     defaultConfig {
-        applicationId = "com.example.swubab"
-        minSdk = 26
-        targetSdk = 33
-        versionCode = 1
-        versionName = "1.0"
+        applicationId = AppConfig.PACKAGE_NAME
+        minSdk = AppConfig.MIN_SDK
+        targetSdk = AppConfig.TARGET_SDK
+        versionCode = AppConfig.VERSION_CODE
+        versionName = AppConfig.VERSION_NAME
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary = true
+        }
     }
 
     buildTypes {
@@ -27,21 +33,51 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = Versions.JAVA_VERSION
+        targetCompatibility = Versions.JAVA_VERSION
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = Versions.JVM_VERSION
+    }
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
     }
 }
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.9.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    // Kotlin
+    implementation(KotlinX.KOTLINX_SERIALIZATION)
+    // AndroidX
+    implementation(AndroidX.ACTIVITY)
+    implementation(AndroidX.APP_COMPAT)
+    implementation(AndroidX.CORE_KTX)
+    implementation(AndroidX.LIFECYCLE_RUNTIME)
+    implementation(AndroidX.PAGING)
+    implementation(AndroidX.LIFECYCLE_VIEWMODEL_KTX)
+    implementation(AndroidX.NAVIGATION_FRAGMENT)
+    implementation(AndroidX.NAVIGATION_UI)
+
+    // Matrial Design
+    implementation(Google.MATERIAL)
+
+    // Test Dependency
+    androidTestImplementation(TestDependencies.EXT_JUNIT)
+    androidTestImplementation(TestDependencies.ESPRESSO_CORE)
+    testImplementation(TestDependencies.JUNIT)
+
+    //Hilt
+    implementation(Google.HILT_ANDROID)
+    kapt(Google.HILT_ANDROID_COMPILER)
+
+    // Third-Party
+    implementation(SquareUp.RETROFIT2)
+    implementation(SquareUp.RETROFIT2_CONVERTER_GSON)
+    implementation(SquareUp.OKHTTP3)
+    implementation(SquareUp.OKHTTP3_LOGGING)
+    implementation(SquareUp.OKHTTP3_BOM)
+    implementation(Jakewharton.TIMBER)
+    implementation(Jakewharton.CONVERTER)
+    implementation(ThirdParty.COIL)
 }
