@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextAppearance.Swubab" parent="">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/swubab_black</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="TextAppearance.Swubab.Regular">
+        <item name="fontFamily">@font/font_pretendard_regular</item>
+        <item name="android:textSize">24sp</item>
+        <item name="lineHeight">29dp</item>
+    </style>
+
+    <style name="TextAppearance.Swubab.Medium">
+        <item name="fontFamily">@font/font_pretendard_medium</item>
+        <item name="android:textSize">24sp</item>
+        <item name="lineHeight">29dp</item>
+    </style>
+
+    <style name="TextAppearance.Swubab.SemiBold">
+        <item name="fontFamily">@font/font_pretendard_semibold</item>
+        <item name="android:textSize">24sp</item>
+        <item name="lineHeight">29dp</item>
+    </style>
+
+    <style name="TextAppearance.Swubab.Bold">
+        <item name="fontFamily">@font/font_pretendard_bold</item>
+        <item name="android:textSize">24sp</item>
+        <item name="lineHeight">29dp</item>
+    </style>
+
+
+</resources>
