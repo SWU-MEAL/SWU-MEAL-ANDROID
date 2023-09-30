@@ -26,6 +26,8 @@
             android:id="@+id/navigation_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingBottom="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:menu="@menu/navigation_main" />
 
