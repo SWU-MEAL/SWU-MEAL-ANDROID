@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.SwuBab.Splash">
+        <item name="android:windowBackground">@color/swubab_main_orange</item>
+    </style>
+</resources>
