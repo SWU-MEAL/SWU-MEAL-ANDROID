@@ -1,8 +1,9 @@
-package com.example.swubab
+package com.example.swubab.presentation
 
 import android.os.Bundle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.swubab.R
 import com.example.swubab.coreui.base.BindingActivity
 import com.example.swubab.databinding.ActivityMainBinding
 
