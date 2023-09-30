@@ -1,8 +1,17 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
-    <style name="Base.Theme.SwuBab" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Base.Theme.SwuBab" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/swubab_main_orange</item>
+        <item name="colorOnPrimary">@color/swubab_white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/swubab_main_gray</item>
+        <item name="colorSecondaryVariant">@color/swubab_gray2</item>
+        <item name="colorOnSecondary">@color/swubab_black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <!-- Customize your theme here. -->
     </style>
 
     <style name="Theme.SwuBab" parent="Base.Theme.SwuBab" />

@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/navigation_today"
-        android:icon="@drawable/ic_test"
+        android:icon="@drawable/selector_today"
         android:title="@string/menu_today_swubab" />
     <item
         android:id="@+id/navigation_week"
-        android:icon="@drawable/ic_test"
+        android:icon="@drawable/selector_week"
         android:title="@string/menu_week_swubab" />
     <item
         android:id="@+id/navigation_mypage"
-        android:icon="@drawable/ic_test"
+        android:icon="@drawable/selector_mypage"
         android:title="@string/menu_mypage" />
 </menu>

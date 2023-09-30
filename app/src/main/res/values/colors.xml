@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="swubab_main_orange">#FF5A01</color>
+    <color name="swubab_main_gray">#2D3F51</color>
+    <color name="swubab_white">#FFFFFFFF</color>
+    <color name="swubab_black">#222122</color>
+    <color name="swubab_gray1">#525252</color>
+    <color name="swubab_gray2">#999999</color>
+    <color name="swubab_gray3">#BBBBBB</color>
+    <color name="swubab_gray4">#EBEBEB</color>
 </resources>
