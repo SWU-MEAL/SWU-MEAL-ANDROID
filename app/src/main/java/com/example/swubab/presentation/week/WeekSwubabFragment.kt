@@ -10,10 +10,11 @@ class WeekSwubabFragment :
     BindingFragment<FragmentWeekSwubabBinding>(R.layout.fragment_week_swubab) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initView()
     }
 
     private fun initView() {
-
     }
+
 
 }
