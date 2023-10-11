@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -24,12 +26,20 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField("String", "BASE_URL", Properties().apply {
+                load(project.rootProject.file("local.properties").inputStream())
+            }["base.url"].toString())
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "BASE_URL", Properties().apply {
+                load(project.rootProject.file("local.properties").inputStream())
+            }["base.url"].toString())
         }
     }
     compileOptions {
