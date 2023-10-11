@@ -3,4 +3,18 @@
     <string name="menu_today_swubab">오늘의 슈밥</string>
     <string name="menu_week_swubab">이번주 슈밥</string>
     <string name="menu_mypage">마이페이지</string>
+    <string name="tv_calender_weekly_mon">월</string>
+    <string name="tv_calender_weekly_tue">화</string>
+    <string name="tv_calender_weekly_wed">수</string>
+    <string name="tv_calender_weekly_thu">목</string>
+    <string name="tv_calender_weekly_fri">금</string>
+    <string name="tv_week_swubab_title_1">이번주</string>
+    <string name="tv_week_swubab_title_2">슈니의 밥상 🍽</string>
+    <string name="tv_week_morning_label">🌞 아침식사</string>
+    <string name="tv_week_morning_time">7:30~9:00</string>
+    <string name="tv_week_lunch_label">🍚 점심식사</string>
+    <string name="tv_week_luch_time">11:00~13:30</string>
+    <string name="tv_week_dinner_label">🌙 저녁식사</string>
+    <string name="tv_week_dinner_time">17:10~18:30</string>
+    <string name="tv_week_report">메뉴 정보가 잘못되었나요?</string>
 </resources>

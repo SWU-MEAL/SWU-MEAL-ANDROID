@@ -1,30 +1,24 @@
 package com.example.swubab.data
 
+import com.example.swubab.BuildConfig.BASE_URL
+import com.example.swubab.data.api.TodaySwubabApiService
+import com.example.swubab.data.api.WeekSwubabApiService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import java.util.concurrent.TimeUnit
 
 object ApiPool {
-
+    val getTodaySwubab = RetrofitPool.retrofit.create(TodaySwubabApiService::class.java)
+    val getWeekSwubab = RetrofitPool.retrofit.create(WeekSwubabApiService::class.java)
 }
 
 
 object RetrofitPool {
-    val toApiServer by lazy {
+    val retrofit: Retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl("")
-            .client(
-                OkHttpClient.Builder().apply {
-                    connectTimeout(10, TimeUnit.SECONDS)
-                    writeTimeout(5, TimeUnit.SECONDS)
-                    readTimeout(5, TimeUnit.SECONDS)
-                }.build()
-            )
+            .baseUrl(BASE_URL)
             .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
             .build()
-
     }
 }
