@@ -3,6 +3,31 @@
     <string name="menu_today_swubab">오늘의 슈밥</string>
     <string name="menu_week_swubab">이번주 슈밥</string>
     <string name="menu_mypage">마이페이지</string>
+
+    <string name="today_swubab_base_title">오늘의</string>
+    <string name="today_swubab_breakfast_title">아침 밥상은?</string>
+    <string name="today_swubab_launch_title">점심 밥상은?</string>
+    <string name="today_swubab_dinner_title">저녁 밥상은?</string>
+
+    <string name="today_swubab_until">시작까지</string>
+
+    <string name="today_swubab_breakfast_time">아침시간 : 7:30~9:00</string>
+    <string name="today_swubab_launch_time">점심시간 : 11:30 ~13:30</string>
+    <string name="today_swubab_dinner_time">저녁시간 : 17:10 ~18:30</string>
+
+    <string name="today_swubab_breakfast_tab_title">조식</string>
+    <string name="today_swubab_launch_tab_title">중식</string>
+    <string name="today_swubab_dinner_tab_title">석식</string>
+
+    <string name="today_swubab_launch_conner_korea">한식코너</string>
+    <string name="today_swubab_launch_conner_first">일품코너</string>
+    <string name="today_swubab_launch_conner_snack">스낵코너</string>
+    <string name="today_swubab_launch_conner_staff">교직원</string>
+
+    <string name="my_swubab_logo">마이페이지 로고</string>
+    <string name="my_swubab_version">버전 정보</string>
+    <string name="my_swubab_terms">이용약관</string>
+
     <string name="tv_calender_weekly_mon">월</string>
     <string name="tv_calender_weekly_tue">화</string>
     <string name="tv_calender_weekly_wed">수</string>

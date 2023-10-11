@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools">
 
     <data>
 
@@ -11,13 +12,85 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/tv_today_swubab_base_title"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="66dp"
+            android:layout_marginStart="24dp"
+            android:textAppearance="@style/TextAppearance.Swubab.SemiBold"
+            android:textColor="@color/swubab_black"
+            android:textSize="28sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@string/today_swubab_base_title" />
+
+        <TextView
+            android:id="@+id/tv_today_swubab_sub_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="오늘의 슈밥"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textAppearance="@style/TextAppearance.Swubab.SemiBold"
+            android:textColor="@color/swubab_black"
+            android:textSize="28sp"
+            app:layout_constraintStart_toStartOf="@id/tv_today_swubab_base_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_today_swubab_base_title"
+            tool:text="@string/today_swubab_breakfast_title" />
 
+        <View
+            android:layout_width="106dp"
+            android:layout_height="6dp"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/today_swubab_orange_line"
+            app:layout_constraintBottom_toBottomOf="@id/tv_today_swubab_sub_title"
+            app:layout_constraintStart_toStartOf="@id/tv_today_swubab_sub_title" />
+
+        <TextView
+            android:id="@+id/tv_today_swubab_time"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.Swubab.Regular"
+            android:textColor="@color/swubab_gray2"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/tv_today_swubab_sub_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_today_swubab_sub_title"
+            tool:text="@string/today_swubab_breakfast_time" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tl_today_swubab_tablayout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_today_swubab_time"
+            app:tabIndicatorColor="@color/swubab_main_orange"
+            app:tabIndicatorHeight="3dp"
+            app:tabBackground="@color/swubab_white"
+            app:tabTextColor="@drawable/today_swubab_text_tab"
+            app:tabSelectedTextAppearance="@style/TextAppearance.Swubab.TabSelected"
+            app:tabTextAppearance="@style/TextAppearance.Swubab.TabDefault" >
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_today_swubab_timecheck"
+            android:paddingTop="4dp"
+            android:text="@string/today_swubab_until"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.Swubab.Regular"
+            android:textColor="@color/swubab_white"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="@+id/tl_today_swubab_tablayout"
+            app:layout_constraintTop_toTopOf="@id/tl_today_swubab_tablayout" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp_today_swubab_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/swubab_gray5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tl_today_swubab_tablayout" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

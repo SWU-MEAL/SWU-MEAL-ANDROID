@@ -8,5 +8,9 @@
     <color name="swubab_gray2">#999999</color>
     <color name="swubab_gray3">#BBBBBB</color>
     <color name="swubab_gray4">#EBEBEB</color>
+    <color name="swubab_gray5">#F6F6F6</color>
+
+    <color name="swubab_main_orange_alpha_20">#33FF5A01</color>
+    <color name="swubab_black_sub">#191919</color>
     <color name="swubab_highlight_orange">#FDDCCA</color>
 </resources>
