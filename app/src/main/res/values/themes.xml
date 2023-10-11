@@ -18,4 +18,9 @@
     <style name="Theme.SwuBab.Splash">
         <item name="android:windowBackground">@drawable/background_splash_screen</item>
     </style>
+
+    <style name="Theme.Toolbar" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/swubab_white</item>
+        <item name="android:windowBackground">@color/swubab_white</item>
+    </style>
 </resources>
