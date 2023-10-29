@@ -28,5 +28,16 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="햄김치볶음밥\n고로케케찹" />
 
+        <ImageView
+            android:id="@+id/iv_today_swubab_breakfast_blank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:src="@drawable/today_swubab_blank"
+            app:layout_constraintBottom_toBottomOf="@id/tv_today_swubab_breakfast_content"
+            app:layout_constraintEnd_toEndOf="@id/tv_today_swubab_breakfast_content"
+            app:layout_constraintStart_toStartOf="@id/tv_today_swubab_breakfast_content"
+            app:layout_constraintTop_toTopOf="@id/tv_today_swubab_breakfast_content" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
