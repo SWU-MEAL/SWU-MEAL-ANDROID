@@ -71,18 +71,6 @@
 
         </com.google.android.material.tabs.TabLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_today_swubab_timecheck"
-            android:paddingTop="4dp"
-            android:text="@string/today_swubab_until"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.Swubab.Regular"
-            android:textColor="@color/swubab_white"
-            android:textSize="10sp"
-            app:layout_constraintStart_toStartOf="@+id/tl_today_swubab_tablayout"
-            app:layout_constraintTop_toTopOf="@id/tl_today_swubab_tablayout" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_today_swubab_viewpager"

@@ -17,7 +17,7 @@ object ApiPool {
 object RetrofitPool {
     val retrofit: Retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl("http://15.164.192.106:10000" + "/")
             .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
             .build()
     }

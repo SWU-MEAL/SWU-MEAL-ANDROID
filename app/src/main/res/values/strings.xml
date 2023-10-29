@@ -25,7 +25,11 @@
     <string name="today_swubab_launch_conner_staff">교직원</string>
 
     <string name="my_swubab_logo">마이페이지 로고</string>
+    <string name="my_swubab_version_logo">버전 확인 로고</string>
     <string name="my_swubab_version">버전 정보</string>
+    <string name="my_swubab_version_check">최신 버전을 사용하고 있는 중입니다</string>
+    <string name="my_swubab_version_info">버전 정보 1.0.0</string>
+    <string name="my_swubab_version_now">현재 버전 1.0.0</string>
     <string name="my_swubab_terms">이용약관</string>
 
     <string name="tv_calender_weekly_mon">월</string>
