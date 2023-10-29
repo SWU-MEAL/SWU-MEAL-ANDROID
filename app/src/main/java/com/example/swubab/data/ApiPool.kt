@@ -7,7 +7,6 @@ import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFact
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
-import timber.log.Timber
 
 object ApiPool {
     val getTodaySwubab = RetrofitPool.retrofit.create(TodaySwubabApiService::class.java)
@@ -17,9 +16,8 @@ object ApiPool {
 
 object RetrofitPool {
     val retrofit: Retrofit by lazy {
-        Timber.tag("dataerror").e("ghcnf")
         Retrofit.Builder()
-            .baseUrl("http://15.164.192.106:10000" + "/")
+            .baseUrl(BASE_URL)
             .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
             .build()
     }
