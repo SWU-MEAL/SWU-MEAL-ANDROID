@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <variable
+            name="meal"
+            type="com.example.swubab.data.dto.response.ResponseWeekSwuBabDto" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -109,10 +113,21 @@
                     android:layout_marginTop="6dp"
                     android:background="@drawable/shape_fill_white_10_rec"
                     android:paddingVertical="26dp"
-                    android:text="테스트\n테스트\n테스트\n테스트\n테스트"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.Swubab.Medium"
-                    app:layout_constraintTop_toBottomOf="@id/tv_week_morning_label" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_week_morning_label"
+                    tools:text="테스트\n테스트\n테스트\n테스트\n테스트" />
+
+                <include
+                    android:id="@+id/layout_morning_empty"
+                    layout="@layout/view_empty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_week_morning_detail"
+                    app:layout_constraintEnd_toEndOf="@id/tv_week_morning_detail"
+                    app:layout_constraintStart_toStartOf="@id/tv_week_morning_detail"
+                    app:layout_constraintTop_toTopOf="@id/tv_week_morning_detail" />
+
 
                 <TextView
                     android:id="@+id/tv_week_lunch_label"
@@ -137,18 +152,87 @@
                     app:layout_constraintBottom_toBottomOf="@id/tv_week_lunch_label"
                     app:layout_constraintStart_toEndOf="@id/tv_week_lunch_label" />
 
-                <TextView
-                    android:id="@+id/tv_week_lunch_detail"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_lunch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="24dp"
                     android:layout_marginTop="6dp"
                     android:background="@drawable/shape_fill_white_10_rec"
                     android:paddingVertical="26dp"
-                    android:text="테스트\n테스트\n테스트\n테스트\n테스트"
-                    android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.Swubab.Medium"
-                    app:layout_constraintTop_toBottomOf="@id/tv_week_lunch_label" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_week_lunch_label">
+
+                    <TextView
+                        android:id="@+id/tv_week_swubab_korean_corner_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="한식 코너"
+                        android:textAppearance="@style/TextAppearance.Swubab.Medium"
+                        app:layout_constraintEnd_toStartOf="@id/tv_week_swubab_japanese_corner_label"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_week_swubab_japanese_corner_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="일품 코너"
+                        android:textAppearance="@style/TextAppearance.Swubab.Medium"
+                        app:layout_constraintEnd_toStartOf="@id/tv_week_swubab_snack_corner_label"
+                        app:layout_constraintStart_toEndOf="@id/tv_week_swubab_korean_corner_label"
+                        app:layout_constraintTop_toTopOf="@id/tv_week_swubab_korean_corner_label" />
+
+                    <TextView
+                        android:id="@+id/tv_week_swubab_snack_corner_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="스낵 코너"
+                        android:textAppearance="@style/TextAppearance.Swubab.Medium"
+                        app:layout_constraintEnd_toStartOf="@id/tv_week_swubab_corner_label"
+                        app:layout_constraintStart_toEndOf="@id/tv_week_swubab_japanese_corner_label"
+                        app:layout_constraintTop_toTopOf="@id/tv_week_swubab_japanese_corner_label" />
+
+                    <TextView
+                        android:id="@+id/tv_week_swubab_corner_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="교직원"
+                        android:textAppearance="@style/TextAppearance.Swubab.Medium"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tv_week_swubab_snack_corner_label"
+                        app:layout_constraintTop_toTopOf="@id/tv_week_swubab_snack_corner_label" />
+
+                    <View
+                        android:id="@+id/view_week_swubab_lunch"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@color/swubab_gray2"
+                        app:layout_constraintTop_toBottomOf="@id/tv_week_swubab_korean_corner_label" />
+
+                    <TextView
+                        android:id="@+id/tv_week_lunch_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="26dp"
+                        android:background="@drawable/shape_fill_white_10_rec"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.Swubab.Medium"
+                        app:layout_constraintTop_toBottomOf="@id/view_week_swubab_lunch"
+                        tools:text="테스트\n테스트\n테스트\n테스트\n테스트" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <include
+                    android:id="@+id/layout_lunck_empty"
+                    layout="@layout/view_empty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@id/layout_lunch"
+                    app:layout_constraintEnd_toEndOf="@id/layout_lunch"
+                    app:layout_constraintStart_toStartOf="@id/layout_lunch"
+                    app:layout_constraintTop_toTopOf="@id/layout_lunch" />
 
                 <TextView
                     android:id="@+id/tv_week_dinner_label"
@@ -159,7 +243,7 @@
                     android:text="@string/tv_week_dinner_label"
                     android:textAppearance="@style/TextAppearance.Swubab.SemiBold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_week_lunch_detail" />
+                    app:layout_constraintTop_toBottomOf="@id/layout_lunch" />
 
 
                 <TextView
@@ -181,10 +265,20 @@
                     android:layout_marginTop="6dp"
                     android:background="@drawable/shape_fill_white_10_rec"
                     android:paddingVertical="26dp"
-                    android:text="테스트\n테스트\n테스트\n테스트\n테스트"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.Swubab.Medium"
-                    app:layout_constraintTop_toBottomOf="@id/tv_week_dinner_label" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_week_dinner_label"
+                    tools:text="테스트\n테스트\n테스트\n테스트\n테스트" />
+
+                <include
+                    android:id="@+id/layout_dinner_empty"
+                    layout="@layout/view_empty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_week_dinner_detail"
+                    app:layout_constraintEnd_toEndOf="@id/tv_week_dinner_detail"
+                    app:layout_constraintStart_toStartOf="@id/tv_week_dinner_detail"
+                    app:layout_constraintTop_toTopOf="@id/tv_week_dinner_detail" />
 
                 <TextView
                     android:id="@+id/tv_week_report"
@@ -199,7 +293,6 @@
                     android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_week_dinner_detail" />
-
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
