@@ -9,20 +9,6 @@ import com.example.swubab.databinding.FragmentTodaySwubabBinding
 
 private const val NUM_TABS = 3
 
-private val pageTitleArray = arrayOf(
-    "아침 밥상은?",
-    "점심 밥상은?",
-    "저녁 밥상은?"
-)
-
-private val pageTimeArray = arrayOf(
-    "아침시간 : 7:30~9:00",
-    "점심시간 : 11:30 ~13:30",
-    "저녁시간 : 17:10 ~18:30"
-)
-
-
-
 class TodayViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle):
     FragmentStateAdapter(fragmentManager, lifecycle){
     override fun getItemCount(): Int {
@@ -36,8 +22,6 @@ class TodayViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecyc
             2 -> return DinnerFragment()
         }
 
-        // binding.tvTodaySwubabSubTitle.text = pageTitleArray[position]
-        // binding.tvTodaySwubabTime.text = pageTimeArray[position]
         return BreakfastFragment()
     }
 }
