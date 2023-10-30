@@ -17,8 +17,6 @@ class WeekSwubabFragment :
     BindingFragment<FragmentWeekSwubabBinding>(R.layout.fragment_week_swubab) {
 
     private val viewModel by viewModels<WeekSwubabViewModel>()
-    private val todayCalendar = Calendar.getInstance()
-    private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,35 +24,45 @@ class WeekSwubabFragment :
     }
 
     private fun initView() {
-        setOnClick()
-        observe()
         viewModel.getWeekSwubab(dateFormat.format(Date()))
+        setTodayTab()
+        setClickEventOnTabLayoutCalenderWeekly()
+        observe()
         toast(dateFormat.format(Date()))
     }
 
-    private fun setOnClick() {
-        with(binding.layoutWeekCalender) {
-            tablayoutCalenderWeekly.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
-                override fun onTabSelected(tab: TabLayout.Tab?) {
-                    when(tab?.position){
-                        0 -> handleDayClick(Calendar.MONDAY)
-                        1 ->
+    private fun setTodayTab() {
+        with(binding.layoutWeekCalender.tablayoutCalenderWeekly) {
+            val selectedTab = when (todayCalendar.get(Calendar.DAY_OF_WEEK)) {
+                Calendar.MONDAY -> getTabAt(0)
+                Calendar.TUESDAY -> getTabAt(1)
+                Calendar.WEDNESDAY -> getTabAt(2)
+                Calendar.THURSDAY -> getTabAt(3)
+                Calendar.FRIDAY -> getTabAt(4)
+                else -> null
+            }
+            selectedTab?.select()
+            selectedTab?.text = "오늘"
+        }
+    }
 
+    private fun setClickEventOnTabLayoutCalenderWeekly() {
+        with(binding.layoutWeekCalender) {
+            tablayoutCalenderWeekly.addOnTabSelectedListener(object :
+                TabLayout.OnTabSelectedListener {
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    when (tab?.position) {
+                        0 -> handleDayClick(Calendar.MONDAY)
+                        1 -> handleDayClick(Calendar.TUESDAY)
+                        2 -> handleDayClick(Calendar.WEDNESDAY)
+                        3 -> handleDayClick(Calendar.THURSDAY)
+                        4 -> handleDayClick(Calendar.FRIDAY)
                     }
                 }
 
-                override fun onTabUnselected(tab: TabLayout.Tab?) {
-                }
-
-                override fun onTabReselected(tab: TabLayout.Tab?) {
-
-                }
+                override fun onTabUnselected(tab: TabLayout.Tab?) {}
+                override fun onTabReselected(tab: TabLayout.Tab?) {}
             })
-            tvCalenderWeeklyMon.setOnClickListener { handleDayClick(Calendar.MONDAY) }
-            tvCalenderWeeklyTue.setOnClickListener { handleDayClick(Calendar.TUESDAY) }
-            tvCalenderWeeklyWed.setOnClickListener { handleDayClick(Calendar.WEDNESDAY) }
-            tvCalenderWeeklyThu.setOnClickListener { handleDayClick(Calendar.THURSDAY) }
-            tvCalenderWeeklyFri.setOnClickListener { handleDayClick(Calendar.FRIDAY) }
         }
     }
 
@@ -63,7 +71,7 @@ class WeekSwubabFragment :
         val daysToAdd = clickedDay - dayOfTheWeek
         todayCalendar.add(Calendar.DAY_OF_MONTH, daysToAdd)
         val selectedDate = dateFormat.format(todayCalendar.time)
-
+        toast(dayOfTheWeek.toString())
         viewModel.getWeekSwubab(selectedDate)
         toast(selectedDate)
     }
@@ -100,5 +108,10 @@ class WeekSwubabFragment :
             if (item != items.last()) menuText.append("\n")
         }
         return menuText.toString()
+    }
+
+    companion object {
+        private val todayCalendar = Calendar.getInstance()
+        private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
     }
 }
