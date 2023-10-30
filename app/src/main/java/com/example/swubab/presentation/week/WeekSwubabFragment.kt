@@ -17,7 +17,10 @@ class WeekSwubabFragment :
     BindingFragment<FragmentWeekSwubabBinding>(R.layout.fragment_week_swubab) {
 
     private val viewModel by viewModels<WeekSwubabViewModel>()
-
+    lateinit var lunchKoreaMenuText: String
+    lateinit var lunchJapaneseMenuText: String
+    lateinit var lunchSnackMenuText: String
+    lateinit var lunchStaffMenuText: String
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
@@ -33,6 +36,7 @@ class WeekSwubabFragment :
 
     private fun setTodayTab() {
         with(binding.layoutWeekCalender.tablayoutCalenderWeekly) {
+            val todayCalendar = Calendar.getInstance()
             val selectedTab = when (todayCalendar.get(Calendar.DAY_OF_WEEK)) {
                 Calendar.MONDAY -> getTabAt(0)
                 Calendar.TUESDAY -> getTabAt(1)
@@ -66,7 +70,27 @@ class WeekSwubabFragment :
         }
     }
 
+    private fun setClickEventOnTabLayoutLunchCorner() {
+        with(binding) {
+            tablayoutWeekSwubabLunchCornerLabel.addOnTabSelectedListener(object :
+                TabLayout.OnTabSelectedListener {
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    when (tab?.position) {
+                        0 -> tvWeekLunchDetail.text = lunchKoreaMenuText
+                        1 -> tvWeekLunchDetail.text = lunchJapaneseMenuText
+                        2 -> tvWeekLunchDetail.text = lunchSnackMenuText
+                        3 -> tvWeekLunchDetail.text = lunchStaffMenuText
+                    }
+                }
+
+                override fun onTabUnselected(tab: TabLayout.Tab?) {}
+                override fun onTabReselected(tab: TabLayout.Tab?) {}
+            })
+        }
+    }
+
     private fun handleDayClick(clickedDay: Int) {
+        val todayCalendar = Calendar.getInstance()
         val dayOfTheWeek = todayCalendar.get(Calendar.DAY_OF_WEEK)
         val daysToAdd = clickedDay - dayOfTheWeek
         todayCalendar.add(Calendar.DAY_OF_MONTH, daysToAdd)
@@ -79,19 +103,34 @@ class WeekSwubabFragment :
     private fun observe() {
         viewModel.getWeekSwubab.observe(viewLifecycleOwner) { response ->
             response?.let {
-                val morningItems = it.result[0].menuList[0].items
-                val lunchItems = it.result[1].menuList[0].items
-                val dinnerItems = it.result[2].menuList[0].items
+                val morningMenus = it.result[0].menuList[0].items
+                val lunchKoreaMenus = it.result[1].menuList[0].items
+                val lunchJapaneseMenus = it.result[1].menuList[1].items
+                val lunchSnackMenus = it.result[1].menuList[2].items
+                val lunchStaffMenus = it.result[1].menuList[3].items
+                val dinnerMenus = it.result[2].menuList[0].items
 
-                val morningMenu = buildMenuText(morningItems)
-                val lunchMenu = buildMenuText(lunchItems)
-                val dinnerMenu = buildMenuText(dinnerItems)
+                val morningMenuText = buildMenuText(morningMenus)
+                lunchKoreaMenuText = buildMenuText(lunchKoreaMenus)
+                lunchJapaneseMenuText = buildMenuText(lunchJapaneseMenus)
+                lunchSnackMenuText = buildMenuText(lunchSnackMenus)
+                lunchStaffMenuText = buildMenuText(lunchStaffMenus)
+                val dinnerMenuText = buildMenuText(dinnerMenus)
 
                 with(binding) {
-                    tvWeekMorningDetail.text = morningMenu
-                    tvWeekLunchDetail.text = lunchMenu
-                    tvWeekDinnerDetail.text = dinnerMenu
+
+                    when (binding.tablayoutWeekSwubabLunchCornerLabel.selectedTabPosition) {
+                        0 -> tvWeekLunchDetail.text = lunchKoreaMenuText
+                        1 -> tvWeekLunchDetail.text = lunchJapaneseMenuText
+                        2 -> tvWeekLunchDetail.text = lunchSnackMenuText
+                        3 -> tvWeekLunchDetail.text = lunchStaffMenuText
+                    }
+
+                    tvWeekMorningDetail.text = morningMenuText
+                    tvWeekDinnerDetail.text = dinnerMenuText
                 }
+
+                setClickEventOnTabLayoutLunchCorner()
             } ?: run {
                 with(binding.layoutMorningEmpty) {
                     emptyIcon.visibility = View.VISIBLE
@@ -111,7 +150,6 @@ class WeekSwubabFragment :
     }
 
     companion object {
-        private val todayCalendar = Calendar.getInstance()
         private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
     }
 }

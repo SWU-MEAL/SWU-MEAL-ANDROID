@@ -5,9 +5,6 @@
 
     <data>
 
-        <variable
-            name="meal"
-            type="com.example.swubab.data.dto.response.ResponseWeekSwuBabDto" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -163,7 +160,7 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_week_lunch_label">
 
                     <com.google.android.material.tabs.TabLayout
-                        android:id="@+id/layout_week_swubab_lunch_corner_label"
+                        android:id="@+id/tablayout_week_swubab_lunch_corner_label"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/shape_fill_white_10_rec"
@@ -205,7 +202,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="@color/swubab_gray3"
-                        app:layout_constraintTop_toBottomOf="@id/layout_week_swubab_lunch_corner_label" />
+                        app:layout_constraintTop_toBottomOf="@id/tablayout_week_swubab_lunch_corner_label" />
 
                     <TextView
                         android:id="@+id/tv_week_lunch_detail"
