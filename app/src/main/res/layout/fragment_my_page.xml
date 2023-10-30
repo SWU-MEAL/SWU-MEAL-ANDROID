@@ -40,26 +40,17 @@
             android:id="@+id/tv_swubab_my_version"
             android:layout_width="match_parent"
             android:layout_height="56dp"
+            android:layout_marginTop="24dp"
             android:gravity="center_vertical"
-            android:paddingStart="24dp"
+            android:paddingHorizontal="24dp"
             android:text="@string/my_swubab_version_info"
             android:textAppearance="@style/TextAppearance.Swubab.Regular"
-            android:textSize="16sp"
             android:textColor="@color/swubab_black"
+            android:textSize="16sp"
+            app:drawableEndCompat="@drawable/ic_my_next"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/abl_swubab_my_appbarlayout" />
-
-
-        <ImageView
-            android:id="@+id/iv_swubab_my_version_next"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:src="@drawable/ic_my_next"
-            app:layout_constraintTop_toTopOf="@id/tv_swubab_my_version"
-            app:layout_constraintBottom_toBottomOf="@id/tv_swubab_my_version"
-            app:layout_constraintEnd_toEndOf="parent"/>
 
 
         <View
@@ -67,7 +58,7 @@
             android:layout_height="1dp"
             android:background="@color/swubab_gray5"
             app:layout_constraintBottom_toBottomOf="@id/tv_swubab_my_version"
-            app:layout_constraintStart_toStartOf="@id/tv_swubab_my_version"/>
+            app:layout_constraintStart_toStartOf="@id/tv_swubab_my_version" />
 
 
         <TextView
@@ -75,33 +66,43 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:gravity="center_vertical"
-            android:paddingStart="24dp"
+            android:paddingHorizontal="24dp"
             android:text="@string/my_swubab_terms"
             android:textAppearance="@style/TextAppearance.Swubab.Regular"
-            android:textSize="16sp"
             android:textColor="@color/swubab_black"
+            android:textSize="16sp"
+            app:drawableEndCompat="@drawable/ic_my_next"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_swubab_my_version" />
 
-
-        <ImageView
-            android:id="@+id/iv_swubab_my_terms_next"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:src="@drawable/ic_my_next"
-            app:layout_constraintTop_toTopOf="@id/tv_swubab_my_terms"
+        <View
+            android:id="@+id/view_my_page_2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/swubab_gray5"
             app:layout_constraintBottom_toBottomOf="@id/tv_swubab_my_terms"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintStart_toStartOf="@id/tv_swubab_my_terms" />
 
+        <TextView
+            android:id="@+id/tv_swubab_my_personal_information"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="24dp"
+            android:text="@string/tv_my_page_personal_information"
+            android:textAppearance="@style/TextAppearance.Swubab.Regular"
+            android:textColor="@color/swubab_black"
+            android:textSize="16sp"
+            app:drawableEndCompat="@drawable/ic_my_next"
+            app:layout_constraintTop_toBottomOf="@id/view_my_page_2" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/swubab_gray5"
-            app:layout_constraintBottom_toBottomOf="@id/tv_swubab_my_terms"
-            app:layout_constraintStart_toStartOf="@id/tv_swubab_my_terms"/>
+            app:layout_constraintBottom_toBottomOf="@id/tv_swubab_my_personal_information"
+            app:layout_constraintStart_toStartOf="@id/tv_swubab_my_personal_information" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

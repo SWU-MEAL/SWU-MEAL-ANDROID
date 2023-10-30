@@ -7,16 +7,21 @@ import com.example.swubab.R
 import com.example.swubab.coreui.base.BindingFragment
 import com.example.swubab.coreui.fragment.toast
 import com.example.swubab.databinding.FragmentWeekSwubabBinding
+import com.google.android.material.tabs.TabLayout
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 
 class WeekSwubabFragment :
     BindingFragment<FragmentWeekSwubabBinding>(R.layout.fragment_week_swubab) {
 
     private val viewModel by viewModels<WeekSwubabViewModel>()
+    private val dateFormat = SimpleDateFormat(DAY_FORMAT, Locale.getDefault())
+    lateinit var lunchKoreaMenuText: String
+    lateinit var lunchJapaneseMenuText: String
+    lateinit var lunchSnackMenuText: String
+    lateinit var lunchStaffMenuText: String
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -24,25 +29,62 @@ class WeekSwubabFragment :
     }
 
     private fun initView() {
-        setOnClick()
+        viewModel.getWeekSwubab(dateFormat.format(Date()))
+        setTodayTab()
+        checkWeekday()
         observe()
-        //viewModel.getWeekSwubab("2023-10-21")
     }
 
-    private fun setToday(): String {
-        val current = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ISO_DATE
-        val formatted = current.format(formatter)
-        return formatted
+    private fun checkWeekday() {
+        val todayCalendar = Calendar.getInstance()
+        if (todayCalendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
+            with(binding) {
+                layoutMorningEmpty.layoutEmpty.visibility = View.VISIBLE
+                layoutLunchEmpty.layoutEmpty.visibility = View.VISIBLE
+                layoutDinnerEmpty.layoutEmpty.visibility = View.VISIBLE
+            }
+        } else {
+            setClickEventOnTabLayoutCalenderWeekly()
+        }
     }
 
-    private fun setOnClick() {
+    private fun setTodayTab() {
+        with(binding.layoutWeekCalender.tablayoutCalenderWeekly) {
+            val todayCalendar = Calendar.getInstance()
+            val selectedTab = when (todayCalendar.get(Calendar.DAY_OF_WEEK)) {
+                Calendar.MONDAY -> getTabAt(0)
+                Calendar.TUESDAY -> getTabAt(1)
+                Calendar.WEDNESDAY -> getTabAt(2)
+                Calendar.THURSDAY -> getTabAt(3)
+                Calendar.FRIDAY -> getTabAt(4)
+                else -> null
+            }
+            selectedTab?.let {
+                it.select()
+                it.text = context.getString(R.string.text_week_swubab_today)
+            }
+        }
+    }
+
+    private fun setClickEventOnTabLayoutCalenderWeekly() {
         with(binding.layoutWeekCalender) {
-            tvCalenderWeeklyMon.setOnClickListener { handleDayClick(Calendar.MONDAY) }
-            tvCalenderWeeklyTue.setOnClickListener { handleDayClick(Calendar.TUESDAY) }
-            tvCalenderWeeklyWed.setOnClickListener { handleDayClick(Calendar.WEDNESDAY) }
-            tvCalenderWeeklyThu.setOnClickListener { handleDayClick(Calendar.THURSDAY) }
-            tvCalenderWeeklyFri.setOnClickListener { handleDayClick(Calendar.FRIDAY) }
+            tablayoutCalenderWeekly.addOnTabSelectedListener(object :
+                TabLayout.OnTabSelectedListener {
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    val clickedDay = when (tab?.position) {
+                        0 -> Calendar.MONDAY
+                        1 -> Calendar.TUESDAY
+                        2 -> Calendar.WEDNESDAY
+                        3 -> Calendar.THURSDAY
+                        4 -> Calendar.FRIDAY
+                        else -> -1
+                    }
+                    handleDayClick(clickedDay)
+                }
+
+                override fun onTabUnselected(tab: TabLayout.Tab?) {}
+                override fun onTabReselected(tab: TabLayout.Tab?) {}
+            })
         }
     }
 
@@ -51,21 +93,7 @@ class WeekSwubabFragment :
         val dayOfTheWeek = todayCalendar.get(Calendar.DAY_OF_WEEK)
         val daysToAdd = clickedDay - dayOfTheWeek
         todayCalendar.add(Calendar.DAY_OF_MONTH, daysToAdd)
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val selectedDate = dateFormat.format(todayCalendar.time)
-
-        val dayTextView = when (clickedDay) {
-            Calendar.MONDAY -> binding.layoutWeekCalender.tvCalenderWeeklyMon
-            Calendar.TUESDAY -> binding.layoutWeekCalender.tvCalenderWeeklyTue
-            Calendar.WEDNESDAY -> binding.layoutWeekCalender.tvCalenderWeeklyWed
-            Calendar.THURSDAY -> binding.layoutWeekCalender.tvCalenderWeeklyThu
-            else -> binding.layoutWeekCalender.tvCalenderWeeklyFri
-        }
-
-        if (clickedDay == dayOfTheWeek) {
-            dayTextView.text = "오늘"
-        }
-
         viewModel.getWeekSwubab(selectedDate)
         toast(selectedDate)
     }
@@ -73,25 +101,60 @@ class WeekSwubabFragment :
     private fun observe() {
         viewModel.getWeekSwubab.observe(viewLifecycleOwner) { response ->
             response?.let {
-                val morningItems = it.result[0].menuList[0].items
-                val lunchItems = it.result[1].menuList[0].items
-                val dinnerItems = it.result[2].menuList[0].items
+                with(binding) {
+                    layoutMorningEmpty.layoutEmpty.visibility = View.INVISIBLE
+                    layoutLunchEmpty.layoutEmpty.visibility = View.INVISIBLE
+                    layoutDinnerEmpty.layoutEmpty.visibility = View.INVISIBLE
+                }
 
-                val morningMenu = buildMenuText(morningItems)
-                val lunchMenu = buildMenuText(lunchItems)
-                val dinnerMenu = buildMenuText(dinnerItems)
+                val morningMenuText = buildMenuText(it.result[0].menuList[0].items)
+                lunchKoreaMenuText = buildMenuText(it.result[1].menuList[0].items)
+                lunchJapaneseMenuText = buildMenuText(it.result[1].menuList[1].items)
+                lunchSnackMenuText = buildMenuText(it.result[1].menuList[2].items)
+                lunchStaffMenuText = buildMenuText(it.result[1].menuList[3].items)
+                val dinnerMenuText = buildMenuText(it.result[2].menuList[0].items)
 
                 with(binding) {
-                    tvWeekMorningDetail.text = morningMenu
-                    tvWeekLunchDetail.text = lunchMenu
-                    tvWeekDinnerDetail.text = dinnerMenu
+                    val selectedMenuText =
+                        when (tablayoutWeekSwubabLunchCornerLabel.selectedTabPosition) {
+                            0 -> lunchKoreaMenuText
+                            1 -> lunchJapaneseMenuText
+                            2 -> lunchSnackMenuText
+                            3 -> lunchStaffMenuText
+                            else -> ""
+                        }
+                    tvWeekMorningDetail.text = morningMenuText
+                    tvWeekLunchDetail.text = selectedMenuText
+                    tvWeekDinnerDetail.text = dinnerMenuText
                 }
+
+                setClickEventOnTabLayoutLunchCorner()
             } ?: run {
-                with(binding.layoutMorningEmpty) {
-                    emptyIcon.visibility = View.VISIBLE
-                    emptyText.visibility = View.VISIBLE
+                with(binding) {
+                    layoutMorningEmpty.layoutEmpty.visibility = View.VISIBLE
+                    layoutLunchEmpty.layoutEmpty.visibility = View.VISIBLE
+                    layoutDinnerEmpty.layoutEmpty.visibility = View.VISIBLE
                 }
             }
+        }
+    }
+
+    private fun setClickEventOnTabLayoutLunchCorner() {
+        with(binding) {
+            tablayoutWeekSwubabLunchCornerLabel.addOnTabSelectedListener(object :
+                TabLayout.OnTabSelectedListener {
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    when (tab?.position) {
+                        0 -> tvWeekLunchDetail.text = lunchKoreaMenuText
+                        1 -> tvWeekLunchDetail.text = lunchJapaneseMenuText
+                        2 -> tvWeekLunchDetail.text = lunchSnackMenuText
+                        3 -> tvWeekLunchDetail.text = lunchStaffMenuText
+                    }
+                }
+
+                override fun onTabUnselected(tab: TabLayout.Tab?) {}
+                override fun onTabReselected(tab: TabLayout.Tab?) {}
+            })
         }
     }
 
@@ -99,8 +162,13 @@ class WeekSwubabFragment :
         val menuText = StringBuilder()
         for (item in items) {
             menuText.append(item)
-            menuText.append("\n")
+            if (item != items.last()) menuText.append(NEW_LINE)
         }
         return menuText.toString()
+    }
+
+    companion object {
+        private const val DAY_FORMAT = "yyyy-MM-dd"
+        private const val NEW_LINE = "\n"
     }
 }
