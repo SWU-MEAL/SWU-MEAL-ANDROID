@@ -94,7 +94,6 @@ class WeekSwubabFragment :
         val daysToAdd = clickedDay - dayOfTheWeek
         todayCalendar.add(Calendar.DAY_OF_MONTH, daysToAdd)
         val selectedDate = dateFormat.format(todayCalendar.time)
-        toast(dayOfTheWeek.toString())
         viewModel.getWeekSwubab(selectedDate)
         toast(selectedDate)
     }
