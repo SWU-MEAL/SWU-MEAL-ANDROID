@@ -55,32 +55,15 @@ class WeekSwubabFragment :
             tablayoutCalenderWeekly.addOnTabSelectedListener(object :
                 TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
-                    when (tab?.position) {
-                        0 -> handleDayClick(Calendar.MONDAY)
-                        1 -> handleDayClick(Calendar.TUESDAY)
-                        2 -> handleDayClick(Calendar.WEDNESDAY)
-                        3 -> handleDayClick(Calendar.THURSDAY)
-                        4 -> handleDayClick(Calendar.FRIDAY)
+                    val clickedDay = when (tab?.position) {
+                        0 -> Calendar.MONDAY
+                        1 -> Calendar.TUESDAY
+                        2 -> Calendar.WEDNESDAY
+                        3 -> Calendar.THURSDAY
+                        4 -> Calendar.FRIDAY
+                        else -> -1
                     }
-                }
-
-                override fun onTabUnselected(tab: TabLayout.Tab?) {}
-                override fun onTabReselected(tab: TabLayout.Tab?) {}
-            })
-        }
-    }
-
-    private fun setClickEventOnTabLayoutLunchCorner() {
-        with(binding) {
-            tablayoutWeekSwubabLunchCornerLabel.addOnTabSelectedListener(object :
-                TabLayout.OnTabSelectedListener {
-                override fun onTabSelected(tab: TabLayout.Tab?) {
-                    when (tab?.position) {
-                        0 -> tvWeekLunchDetail.text = lunchKoreaMenuText
-                        1 -> tvWeekLunchDetail.text = lunchJapaneseMenuText
-                        2 -> tvWeekLunchDetail.text = lunchSnackMenuText
-                        3 -> tvWeekLunchDetail.text = lunchStaffMenuText
-                    }
+                    handleDayClick(clickedDay)
                 }
 
                 override fun onTabUnselected(tab: TabLayout.Tab?) {}
@@ -103,30 +86,24 @@ class WeekSwubabFragment :
     private fun observe() {
         viewModel.getWeekSwubab.observe(viewLifecycleOwner) { response ->
             response?.let {
-                val morningMenus = it.result[0].menuList[0].items
-                val lunchKoreaMenus = it.result[1].menuList[0].items
-                val lunchJapaneseMenus = it.result[1].menuList[1].items
-                val lunchSnackMenus = it.result[1].menuList[2].items
-                val lunchStaffMenus = it.result[1].menuList[3].items
-                val dinnerMenus = it.result[2].menuList[0].items
-
-                val morningMenuText = buildMenuText(morningMenus)
-                lunchKoreaMenuText = buildMenuText(lunchKoreaMenus)
-                lunchJapaneseMenuText = buildMenuText(lunchJapaneseMenus)
-                lunchSnackMenuText = buildMenuText(lunchSnackMenus)
-                lunchStaffMenuText = buildMenuText(lunchStaffMenus)
-                val dinnerMenuText = buildMenuText(dinnerMenus)
+                val morningMenuText = buildMenuText(it.result[0].menuList[0].items)
+                lunchKoreaMenuText = buildMenuText(it.result[1].menuList[0].items)
+                lunchJapaneseMenuText = buildMenuText(it.result[1].menuList[1].items)
+                lunchSnackMenuText = buildMenuText(it.result[1].menuList[2].items)
+                lunchStaffMenuText = buildMenuText(it.result[1].menuList[3].items)
+                val dinnerMenuText = buildMenuText(it.result[2].menuList[0].items)
 
                 with(binding) {
-
-                    when (binding.tablayoutWeekSwubabLunchCornerLabel.selectedTabPosition) {
-                        0 -> tvWeekLunchDetail.text = lunchKoreaMenuText
-                        1 -> tvWeekLunchDetail.text = lunchJapaneseMenuText
-                        2 -> tvWeekLunchDetail.text = lunchSnackMenuText
-                        3 -> tvWeekLunchDetail.text = lunchStaffMenuText
-                    }
-
+                    val selectedMenuText =
+                        when (tablayoutWeekSwubabLunchCornerLabel.selectedTabPosition) {
+                            0 -> lunchKoreaMenuText
+                            1 -> lunchJapaneseMenuText
+                            2 -> lunchSnackMenuText
+                            3 -> lunchStaffMenuText
+                            else -> ""
+                        }
                     tvWeekMorningDetail.text = morningMenuText
+                    tvWeekLunchDetail.text = selectedMenuText
                     tvWeekDinnerDetail.text = dinnerMenuText
                 }
 
@@ -137,6 +114,25 @@ class WeekSwubabFragment :
                     emptyText.visibility = View.VISIBLE
                 }
             }
+        }
+    }
+
+    private fun setClickEventOnTabLayoutLunchCorner() {
+        with(binding) {
+            tablayoutWeekSwubabLunchCornerLabel.addOnTabSelectedListener(object :
+                TabLayout.OnTabSelectedListener {
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    when (tab?.position) {
+                        0 -> tvWeekLunchDetail.text = lunchKoreaMenuText
+                        1 -> tvWeekLunchDetail.text = lunchJapaneseMenuText
+                        2 -> tvWeekLunchDetail.text = lunchSnackMenuText
+                        3 -> tvWeekLunchDetail.text = lunchStaffMenuText
+                    }
+                }
+
+                override fun onTabUnselected(tab: TabLayout.Tab?) {}
+                override fun onTabReselected(tab: TabLayout.Tab?) {}
+            })
         }
     }
 
