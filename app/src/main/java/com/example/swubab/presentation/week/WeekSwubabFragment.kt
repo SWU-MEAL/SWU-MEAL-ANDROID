@@ -17,10 +17,12 @@ class WeekSwubabFragment :
     BindingFragment<FragmentWeekSwubabBinding>(R.layout.fragment_week_swubab) {
 
     private val viewModel by viewModels<WeekSwubabViewModel>()
+    private val dateFormat = SimpleDateFormat(DAY_FORMAT, Locale.getDefault())
     lateinit var lunchKoreaMenuText: String
     lateinit var lunchJapaneseMenuText: String
     lateinit var lunchSnackMenuText: String
     lateinit var lunchStaffMenuText: String
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
@@ -29,9 +31,21 @@ class WeekSwubabFragment :
     private fun initView() {
         viewModel.getWeekSwubab(dateFormat.format(Date()))
         setTodayTab()
-        setClickEventOnTabLayoutCalenderWeekly()
+        checkWeekday()
         observe()
-        toast(dateFormat.format(Date()))
+    }
+
+    private fun checkWeekday() {
+        val todayCalendar = Calendar.getInstance()
+        if (todayCalendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
+            with(binding) {
+                layoutMorningEmpty.layoutEmpty.visibility = View.VISIBLE
+                layoutLunchEmpty.layoutEmpty.visibility = View.VISIBLE
+                layoutDinnerEmpty.layoutEmpty.visibility = View.VISIBLE
+            }
+        } else {
+            setClickEventOnTabLayoutCalenderWeekly()
+        }
     }
 
     private fun setTodayTab() {
@@ -47,7 +61,7 @@ class WeekSwubabFragment :
             }
             selectedTab?.let {
                 it.select()
-                it.text = "오늘"
+                it.text = context.getString(R.string.text_week_swubab_today)
             }
         }
     }
@@ -149,12 +163,13 @@ class WeekSwubabFragment :
         val menuText = StringBuilder()
         for (item in items) {
             menuText.append(item)
-            if (item != items.last()) menuText.append("\n")
+            if (item != items.last()) menuText.append(NEW_LINE)
         }
         return menuText.toString()
     }
 
     companion object {
-        private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        private const val DAY_FORMAT = "yyyy-MM-dd"
+        private const val NEW_LINE = "\n"
     }
 }
