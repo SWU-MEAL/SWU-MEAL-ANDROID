@@ -46,4 +46,9 @@
     <string name="tv_week_dinner_label">🌙 저녁식사</string>
     <string name="tv_week_dinner_time">17:10~18:30</string>
     <string name="tv_week_report">메뉴 정보가 잘못되었나요?</string>
+    <string name="tv_test_dummy_data">테스트\n테스트\n테스트\n테스트\n테스트</string>
+    <string name="tv_week_swubab_lunch_corner_korea">한식코너</string>
+    <string name="tv_week_swubab_lunch_corner_japanese">일품코너</string>
+    <string name="tv_week_swubab_lunch_corner_snack">스낵코너</string>
+    <string name="tv_week_swubab_lunch_corner_staff">교직원</string>
 </resources>

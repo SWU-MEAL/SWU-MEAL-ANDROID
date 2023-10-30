@@ -111,19 +111,18 @@
                     android:layout_marginTop="6dp"
                     android:background="@drawable/shape_fill_white_10_rec"
                     android:paddingVertical="24dp"
+                    android:text="@string/tv_test_dummy_data"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.Swubab.Medium"
-                    app:layout_constraintTop_toBottomOf="@id/tv_week_morning_label"
-                    tools:text="테스트\n테스트\n테스트\n테스트\n테스트" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_week_morning_label" />
 
                 <include
                     android:id="@+id/layout_morning_empty"
                     layout="@layout/view_empty"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginHorizontal="24dp"
                     app:layout_constraintBottom_toBottomOf="@id/tv_week_morning_detail"
-                    app:layout_constraintEnd_toEndOf="@id/tv_week_morning_detail"
-                    app:layout_constraintStart_toStartOf="@id/tv_week_morning_detail"
                     app:layout_constraintTop_toTopOf="@id/tv_week_morning_detail" />
 
 
@@ -175,25 +174,25 @@
                             android:id="@+id/tv_week_swubab_lunch_corner_korea"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="한식코너" />
+                            android:text="@string/tv_week_swubab_lunch_corner_korea" />
 
                         <com.google.android.material.tabs.TabItem
                             android:id="@+id/tv_week_swubab_lunch_corner_japanese"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="일품코너" />
+                            android:text="@string/tv_week_swubab_lunch_corner_japanese" />
 
                         <com.google.android.material.tabs.TabItem
                             android:id="@+id/tv_week_swubab_lunch_corner_snack"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="스낵코너" />
+                            android:text="@string/tv_week_swubab_lunch_corner_snack" />
 
                         <com.google.android.material.tabs.TabItem
                             android:id="@+id/tv_week_swubab_lunch_corner_staff"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="교직원" />
+                            android:text="@string/tv_week_swubab_lunch_corner_staff" />
 
                     </com.google.android.material.tabs.TabLayout>
 
@@ -213,20 +212,16 @@
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.Swubab.Medium"
                         app:layout_constraintTop_toBottomOf="@id/view_week_swubab_lunch"
-                        tools:text="테스트\n테스트\n테스트\n테스트\n테스트" />
+                        tools:text="@string/tv_test_dummy_data" />
+
+                    <include
+                        android:id="@+id/layout_lunch_empty"
+                        layout="@layout/view_empty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                <include
-                    android:id="@+id/layout_lunck_empty"
-                    layout="@layout/view_empty"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="@id/layout_lunch"
-                    app:layout_constraintEnd_toEndOf="@id/layout_lunch"
-                    app:layout_constraintStart_toStartOf="@id/layout_lunch"
-                    app:layout_constraintTop_toTopOf="@id/layout_lunch" />
 
                 <TextView
                     android:id="@+id/tv_week_dinner_label"
@@ -262,17 +257,16 @@
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.Swubab.Medium"
                     app:layout_constraintTop_toBottomOf="@id/tv_week_dinner_label"
-                    tools:text="테스트\n테스트\n테스트\n테스트\n테스트" />
+                    tools:text="@string/tv_test_dummy_data" />
 
                 <include
                     android:id="@+id/layout_dinner_empty"
                     layout="@layout/view_empty"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_week_dinner_detail"
-                    app:layout_constraintEnd_toEndOf="@id/tv_week_dinner_detail"
-                    app:layout_constraintStart_toStartOf="@id/tv_week_dinner_detail"
-                    app:layout_constraintTop_toTopOf="@id/tv_week_dinner_detail" />
+                    android:layout_marginHorizontal="24dp"
+                    android:layout_marginTop="6dp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_week_dinner_label" />
 
                 <TextView
                     android:id="@+id/tv_week_report"

@@ -7,15 +7,18 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_empty"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_fill_white_10_rec"
+        android:paddingVertical="24dp"
+        android:visibility="invisible">
 
         <ImageView
             android:id="@+id/empty_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_emtpy_meal"
-            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -26,7 +29,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:src="@drawable/ic_empty_meal_text"
-            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/empty_icon" />

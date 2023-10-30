@@ -45,8 +45,10 @@ class WeekSwubabFragment :
                 Calendar.FRIDAY -> getTabAt(4)
                 else -> null
             }
-            selectedTab?.select()
-            selectedTab?.text = "오늘"
+            selectedTab?.let {
+                it.select()
+                it.text = "오늘"
+            }
         }
     }
 
@@ -86,6 +88,12 @@ class WeekSwubabFragment :
     private fun observe() {
         viewModel.getWeekSwubab.observe(viewLifecycleOwner) { response ->
             response?.let {
+                with(binding) {
+                    layoutMorningEmpty.layoutEmpty.visibility = View.INVISIBLE
+                    layoutLunchEmpty.layoutEmpty.visibility = View.INVISIBLE
+                    layoutDinnerEmpty.layoutEmpty.visibility = View.INVISIBLE
+                }
+
                 val morningMenuText = buildMenuText(it.result[0].menuList[0].items)
                 lunchKoreaMenuText = buildMenuText(it.result[1].menuList[0].items)
                 lunchJapaneseMenuText = buildMenuText(it.result[1].menuList[1].items)
@@ -109,9 +117,10 @@ class WeekSwubabFragment :
 
                 setClickEventOnTabLayoutLunchCorner()
             } ?: run {
-                with(binding.layoutMorningEmpty) {
-                    emptyIcon.visibility = View.VISIBLE
-                    emptyText.visibility = View.VISIBLE
+                with(binding) {
+                    layoutMorningEmpty.layoutEmpty.visibility = View.VISIBLE
+                    layoutLunchEmpty.layoutEmpty.visibility = View.VISIBLE
+                    layoutDinnerEmpty.layoutEmpty.visibility = View.VISIBLE
                 }
             }
         }
