@@ -19,7 +19,7 @@ class LaunchFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getTodoApi()
+        getMenuApi()
         radio_button_checked()
     }
 
@@ -46,7 +46,7 @@ class LaunchFragment :
         }
     }
 
-    private fun getTodoApi() {
+    private fun getMenuApi() {
         menu_list.clear()
         ApiPool.getTodaySwubab.getTodayMenu("l").enqueue(
             object : retrofit2.Callback<ResponseTodaySwubabDto> {

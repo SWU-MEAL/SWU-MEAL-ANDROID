@@ -18,14 +18,10 @@ class DinnerFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getTodoApi()
+        getMenuApi()
     }
 
-    private fun initView() {
-
-    }
-
-    private fun getTodoApi() {
+    private fun getMenuApi() {
         ApiPool.getTodaySwubab.getTodayMenu("d").enqueue(
             object : retrofit2.Callback<ResponseTodaySwubabDto> {
                 override fun onResponse(
