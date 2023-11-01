@@ -28,16 +28,16 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="야채죽\n셀프 시리얼" />
 
-        <ImageView
+        <include
             android:id="@+id/iv_today_swubab_dinner_blank"
-            android:visibility="gone"
+            layout="@layout/view_empty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/today_swubab_blank"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/tv_today_swubab_dinner_content"
             app:layout_constraintEnd_toEndOf="@id/tv_today_swubab_dinner_content"
             app:layout_constraintStart_toStartOf="@id/tv_today_swubab_dinner_content"
-            app:layout_constraintTop_toTopOf="@id/tv_today_swubab_dinner_content" />
+            app:layout_constraintTop_toTopOf="@id/tv_today_swubab_dinner_content"  />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
