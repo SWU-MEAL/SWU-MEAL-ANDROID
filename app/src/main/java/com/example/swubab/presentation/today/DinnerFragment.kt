@@ -36,7 +36,7 @@ class DinnerFragment  :
                             if(it.code == 200){
                                 var result = it.data.result?.get(0)
                                 if (result?.items != null) {
-                                    binding.ivTodaySwubabDinnerBlank.visibility =View.GONE
+                                    binding.ivTodaySwubabDinnerBlank.layoutEmpty.visibility  =View.GONE
                                     var content = ""
                                     for(i in 0..result.items!!.size -1){
                                         content = content + result.items!!.get(i).toString() + "\n"
@@ -44,7 +44,7 @@ class DinnerFragment  :
                                     binding.tvTodaySwubabDinnerContent.setText(content)
                                 }
                                 else{
-                                    binding.ivTodaySwubabDinnerBlank.visibility =View.VISIBLE
+                                    binding.ivTodaySwubabDinnerBlank.layoutEmpty.visibility  =View.VISIBLE
                                 }
                             }
                         }

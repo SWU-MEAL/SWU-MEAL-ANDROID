@@ -54,7 +54,7 @@ class LaunchFragment :
                             if(it.code == 200){
                                 var result = it.data?.result
                                 if (result != null) {
-                                    binding.ivTodaySwubabLaunchBlank.visibility =View.GONE
+                                    binding.ivTodaySwubabLaunchBlank.layoutEmpty.visibility  =View.GONE
                                     var num = 0
                                     Log.d("Aaa", result.toString())
                                     for(num in 0..result.size-1) {
@@ -81,7 +81,7 @@ class LaunchFragment :
                                     }
                                 }
                                 else{
-                                    binding.ivTodaySwubabLaunchBlank.visibility =View.VISIBLE
+                                    binding.ivTodaySwubabLaunchBlank.layoutEmpty.visibility  =View.VISIBLE
                                 }
                             }
                         }
