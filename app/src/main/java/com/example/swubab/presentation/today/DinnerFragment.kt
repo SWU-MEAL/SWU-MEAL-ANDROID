@@ -6,14 +6,14 @@ import android.view.View
 import com.example.swubab.R
 import com.example.swubab.coreui.base.BindingFragment
 import com.example.swubab.data.ApiPool
-import com.example.swubab.data.TodaySwubabDto
+import com.example.swubab.data.dto.response.ResponseTodaySwubabDto
 import com.example.swubab.databinding.FragmentDinnerBinding
 import retrofit2.Call
 import retrofit2.Response
 
 
-class DinnerFragment  :
-    BindingFragment<FragmentDinnerBinding>(R.layout.fragment_dinner){
+class DinnerFragment :
+    BindingFragment<FragmentDinnerBinding>(R.layout.fragment_dinner) {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -27,24 +27,26 @@ class DinnerFragment  :
 
     private fun getTodoApi() {
         ApiPool.getTodaySwubab.getTodayMenu("d").enqueue(
-            object : retrofit2.Callback<TodaySwubabDto> {
+            object : retrofit2.Callback<ResponseTodaySwubabDto> {
                 override fun onResponse(
-                    call: Call<TodaySwubabDto>, response: Response<TodaySwubabDto>
+                    call: Call<ResponseTodaySwubabDto>, response: Response<ResponseTodaySwubabDto>
                 ) {
                     if (response.isSuccessful) {
-                        response.body()?.let { it->
-                            if(it.code == 200){
-                                var result = it.data.result?.get(0)
+                        response.body()?.let { it ->
+                            if (it.code == 200) {
+                                val data = it.data
+                                val result = data?.result?.get(0)
                                 if (result?.items != null) {
-                                    binding.ivTodaySwubabDinnerBlank.visibility =View.GONE
+                                    binding.layoutTodaySwubabDinnerBlank.layoutEmpty.visibility =
+                                        View.GONE
                                     var content = ""
-                                    for(i in 0..result.items!!.size -1){
+                                    for (i in 0..result.items!!.size - 1) {
                                         content = content + result.items!!.get(i).toString() + "\n"
                                     }
                                     binding.tvTodaySwubabDinnerContent.setText(content)
-                                }
-                                else{
-                                    binding.ivTodaySwubabDinnerBlank.visibility =View.VISIBLE
+                                } else {
+                                    binding.layoutTodaySwubabDinnerBlank.layoutEmpty.visibility =
+                                        View.VISIBLE
                                 }
                             }
                         }
@@ -52,7 +54,8 @@ class DinnerFragment  :
                         Log.d("error", "실패한 응답")
                     }
                 }
-                override fun onFailure(call: Call<TodaySwubabDto> , t: Throwable) {
+
+                override fun onFailure(call: Call<ResponseTodaySwubabDto>, t: Throwable) {
                     t.message?.let { Log.d("error", it) } ?: "서버통신 실패"
                 }
             })

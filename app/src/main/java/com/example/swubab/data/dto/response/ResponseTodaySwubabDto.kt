@@ -1,16 +1,16 @@
-package com.example.swubab.data
+package com.example.swubab.data.dto.response
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class TodaySwubabDto(
+data class ResponseTodaySwubabDto(
     @SerialName("code")
     val code: Int?,
     @SerialName("message")
     val message: String?,
     @SerialName("data")
-    val `data`: Data
+    val `data`: Data?
 ) {
     @Serializable
     data class Data(
