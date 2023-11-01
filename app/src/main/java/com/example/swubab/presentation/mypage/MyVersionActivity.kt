@@ -1,8 +1,8 @@
 package com.example.swubab.presentation.mypage
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.swubab.R
 import com.example.swubab.coreui.base.BindingActivity
 import com.example.swubab.databinding.ActivityMyVersionBinding
@@ -10,6 +10,7 @@ import com.example.swubab.databinding.ActivityMyVersionBinding
 class MyVersionActivity : BindingActivity<ActivityMyVersionBinding>(R.layout.activity_my_version) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setDarkMode()
         initView()
     }
 
@@ -26,5 +27,9 @@ class MyVersionActivity : BindingActivity<ActivityMyVersionBinding>(R.layout.act
             android.R.id.home -> finish()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun setDarkMode() {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 }
