@@ -101,16 +101,15 @@
                 tools:text="햄김치볶음밥\n고로케케찹" />
 
             <include
-                android:id="@+id/iv_today_swubab_launch_blank"
-                layout="@layout/view_empty"
+                android:id="@+id/layout_today_swubab_launch_blank"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                layout="@layout/view_empty"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@id/tv_today_swubab_launch_content"
                 app:layout_constraintEnd_toEndOf="@id/tv_today_swubab_launch_content"
                 app:layout_constraintStart_toStartOf="@id/tv_today_swubab_launch_content"
-                app:layout_constraintTop_toTopOf="@id/tv_today_swubab_launch_content"  />
-
+                app:layout_constraintTop_toTopOf="@id/tv_today_swubab_launch_content" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
