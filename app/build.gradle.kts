@@ -25,6 +25,15 @@ android {
         }
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile = file("key.jks") // App 폴더 기준
+            storePassword = "159951zx!"
+            keyAlias = "swubabkey"
+            keyPassword = "159951zx!"
+        }
+    }
+
     buildTypes {
         debug {
             buildConfigField("String", "BASE_URL", Properties().apply {

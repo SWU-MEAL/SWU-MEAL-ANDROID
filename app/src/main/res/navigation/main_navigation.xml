@@ -6,14 +6,14 @@
 
     <fragment
         android:id="@+id/navigation_today"
-        android:name="com.example.swubab.presentation.today.TodaySwubabFragment"
+        android:name="com.swubab.presentation.today.TodaySwubabFragment"
         android:label="TodaySwubabFragment" />
     <fragment
         android:id="@+id/navigation_week"
-        android:name="com.example.swubab.presentation.week.WeekSwubabFragment"
+        android:name="com.swubab.presentation.week.WeekSwubabFragment"
         android:label="WeekSwubabFragment" />
     <fragment
         android:id="@+id/navigation_mypage"
-        android:name="com.example.swubab.presentation.mypage.MypageFragment"
+        android:name="com.swubab.presentation.mypage.MypageFragment"
         android:label="MypageFragment" />
 </navigation>

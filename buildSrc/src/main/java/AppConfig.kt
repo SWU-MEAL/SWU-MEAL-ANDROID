@@ -1,5 +1,5 @@
 object AppConfig {
-    const val PACKAGE_NAME = "com.example.swubab"
+    const val PACKAGE_NAME = "com.swubab"
     const val COMPILE_SDK = 33
     const val TARGET_SDK = 33
     const val MIN_SDK = 26
