@@ -6,8 +6,15 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface TodaySwubabApiService {
-    @GET("/v1/menu/today")
+    companion object {
+        const val V1 = "v1"
+        const val MENU = "menu"
+        const val TODAY = "today"
+        const val TIME = "time"
+    }
+
+    @GET("/$V1/$MENU/$TODAY")
     suspend fun getTodayMenu(
-        @Query(value = "time") time: String
+        @Query(value = TIME) time: String
     ): BaseResponseNullable<ResponseTodaySwubabDto>
 }

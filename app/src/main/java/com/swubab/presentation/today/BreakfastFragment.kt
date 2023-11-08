@@ -14,7 +14,7 @@ class BreakfastFragment : BindingFragment<FragmentBreakfastBinding>(R.layout.fra
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getTodaySwubab("b")
+        viewModel.getTodaySwubab(BREAKFAST)
         observe()
     }
 
@@ -27,7 +27,7 @@ class BreakfastFragment : BindingFragment<FragmentBreakfastBinding>(R.layout.fra
                 var content = ""
                 for (i in 0 until result.items.size) {
                     content =
-                        content + result.items[i].toString() + "\n"
+                        content + result.items[i].toString() + NEW_LINE
                 }
                 binding.tvTodaySwubabBreakfastContent.text = content
 
@@ -35,5 +35,10 @@ class BreakfastFragment : BindingFragment<FragmentBreakfastBinding>(R.layout.fra
                 binding.layoutTodaySwubabBreakfastBlank.layoutEmpty.visibility = View.VISIBLE
             }
         }
+    }
+
+    companion object {
+        private const val BREAKFAST = "b"
+        private const val NEW_LINE = "\n"
     }
 }

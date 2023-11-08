@@ -14,7 +14,7 @@ class DinnerFragment : BindingFragment<FragmentDinnerBinding>(R.layout.fragment_
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getTodaySwubab("d")
+        viewModel.getTodaySwubab(DINNER)
         observe()
     }
 
@@ -26,7 +26,7 @@ class DinnerFragment : BindingFragment<FragmentDinnerBinding>(R.layout.fragment_
                     View.GONE
                 var content = ""
                 for (i in 0 until result.items.size) {
-                    content = content + result.items[i].toString() + "\n"
+                    content = content + result.items[i].toString() + NEW_LINE
                 }
                 binding.tvTodaySwubabDinnerContent.setText(content)
             } ?: run {
@@ -34,5 +34,10 @@ class DinnerFragment : BindingFragment<FragmentDinnerBinding>(R.layout.fragment_
                     View.VISIBLE
             }
         }
+    }
+
+    companion object {
+        private const val DINNER = "d"
+        private const val NEW_LINE = "\n"
     }
 }

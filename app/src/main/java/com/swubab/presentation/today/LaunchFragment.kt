@@ -14,7 +14,7 @@ class LaunchFragment : BindingFragment<FragmentLaunchBinding>(R.layout.fragment_
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getTodaySwubab("l")
+        viewModel.getTodaySwubab(LAUNCH)
         observe()
         radioButtonChecked()
     }
@@ -53,25 +53,25 @@ class LaunchFragment : BindingFragment<FragmentLaunchBinding>(R.layout.fragment_
                     var content = ""
                     for (i in 0 until result[num]!!.items!!.size) {
                         content = content + result[num]!!.items?.get(i)
-                            .toString() + "\n"
+                            .toString() + NEW_LINE
                     }
 
-                    if ((result[num]?.type).equals("교직원")) {
+                    if ((result[num]?.type).equals(STAFF)) {
                         menuList.put(0, content)
                     }
                     when (result[num]?.corner) {
-                        "일품" -> {
+                        JAPANESE -> {
                             menuList.put(2, content)
                         }
 
-                        "한식" -> {
+                        KOREA -> {
                             menuList.put(1, content)
                             binding.tvTodaySwubabLaunchContent.setText(
                                 menuList.get(1)
                             )
                         }
 
-                        "스낵" -> {
+                        SNACK -> {
                             menuList.put(3, content)
                         }
                     }
@@ -81,5 +81,14 @@ class LaunchFragment : BindingFragment<FragmentLaunchBinding>(R.layout.fragment_
                     View.VISIBLE
             }
         }
+    }
+
+    companion object {
+        private const val LAUNCH = "l"
+        private const val NEW_LINE = "\n"
+        private const val STAFF = "교직원"
+        private const val JAPANESE = "일품"
+        private const val KOREA = "한식"
+        private const val SNACK = "스낵"
     }
 }
