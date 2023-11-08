@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayout
 import com.swubab.R
+import com.swubab.coreui.base.BindingFragment
 import com.swubab.databinding.FragmentWeekSwubabBinding
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -12,7 +13,7 @@ import java.util.Date
 import java.util.Locale
 
 class WeekSwubabFragment :
-    com.swubab.coreui.base.BindingFragment<FragmentWeekSwubabBinding>(R.layout.fragment_week_swubab) {
+    BindingFragment<FragmentWeekSwubabBinding>(R.layout.fragment_week_swubab) {
 
     private val viewModel by viewModels<WeekSwubabViewModel>()
     private val dateFormat = SimpleDateFormat(DAY_FORMAT, Locale.getDefault())

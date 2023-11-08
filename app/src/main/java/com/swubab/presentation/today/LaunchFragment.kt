@@ -1,110 +1,85 @@
 package com.swubab.presentation.today
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import androidx.fragment.app.viewModels
 import com.swubab.R
 import com.swubab.coreui.base.BindingFragment
-import com.swubab.data.ApiPool
-import com.swubab.data.dto.response.ResponseTodaySwubabDto
 import com.swubab.databinding.FragmentLaunchBinding
-import retrofit2.Call
-import retrofit2.Response
-import timber.log.Timber
 
-class LaunchFragment :
-    com.swubab.coreui.base.BindingFragment<FragmentLaunchBinding>(R.layout.fragment_launch) {
+class LaunchFragment : BindingFragment<FragmentLaunchBinding>(R.layout.fragment_launch) {
 
-    var menu_list: HashMap<Int, String> = hashMapOf()
+    private val viewModel by viewModels<TodaySwubabViewModel>()
+    private var menuList: HashMap<Int, String> = hashMapOf()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getMenuApi()
-        radio_button_checked()
+        viewModel.getTodaySwubab("l")
+        observe()
+        radioButtonChecked()
     }
 
-    private fun radio_button_checked() {
+    private fun radioButtonChecked() {
         binding.rgTodaySwubabConner.setOnCheckedChangeListener { group, checkId ->
             when (checkId) {
                 R.id.rb_today_swubab_conner_snack -> {
-                    binding.tvTodaySwubabLaunchContent.setText(menu_list[3])
+                    binding.tvTodaySwubabLaunchContent.setText(menuList[3])
                 }
 
                 R.id.rb_today_swubab_conner_staff -> {
-                    binding.tvTodaySwubabLaunchContent.setText(menu_list[0])
+                    binding.tvTodaySwubabLaunchContent.setText(menuList[0])
                 }
 
                 R.id.rb_today_swubab_conner_korea -> {
-                    binding.tvTodaySwubabLaunchContent.setText(menu_list[1])
+                    binding.tvTodaySwubabLaunchContent.setText(menuList[1])
                 }
 
                 R.id.rb_today_swubab_conner_first -> {
-                    binding.tvTodaySwubabLaunchContent.setText(menu_list[2])
+                    binding.tvTodaySwubabLaunchContent.setText(menuList[2])
                 }
             }
 
         }
     }
 
-    private fun getMenuApi() {
-        menu_list.clear()
-        ApiPool.getTodaySwubab.getTodayMenu("l").enqueue(
-            object : retrofit2.Callback<ResponseTodaySwubabDto> {
-                override fun onResponse(
-                    call: Call<ResponseTodaySwubabDto>, response: Response<ResponseTodaySwubabDto>
-                ) {
+    private fun observe() {
+        menuList.clear()
+        viewModel.getTodaySwubab.observe(viewLifecycleOwner) { response ->
+            response?.let {
+                val result = it.result
+                binding.layoutTodaySwubabLaunchBlank.layoutEmpty.visibility =
+                    View.INVISIBLE
+                for (num in result.indices) {
+                    var content = ""
+                    for (i in 0 until result[num]!!.items!!.size) {
+                        content = content + result[num]!!.items?.get(i)
+                            .toString() + "\n"
+                    }
 
-                    if (response.isSuccessful) {
-                        response.body()?.let { it ->
-                            if (it.code == 200) {
-                                val data = it.data
-                                if (data == null) {
-                                    binding.layoutTodaySwubabLaunchBlank.layoutEmpty.visibility = View.VISIBLE
-
-                                } else {
-                                    val result = data?.result
-                                    if (result != null) {
-                                        binding.layoutTodaySwubabLaunchBlank.layoutEmpty.visibility =
-                                            View.INVISIBLE
-                                        for (num in 0..result.size - 1) {
-                                            var content = ""
-                                            for (i in 0..(result[num]!!.items!!.size - 1)) {
-                                                content = content + result[num]!!.items?.get(i)
-                                                    .toString() + "\n"
-                                            }
-
-                                            if ((result[num]?.type).equals("교직원")) {
-                                                menu_list.put(0, content)
-                                            }
-                                            when (result[num]?.corner) {
-                                                "일품" -> {
-                                                    menu_list.put(2, content)
-                                                }
-
-                                                "한식" -> {
-                                                    menu_list.put(1, content)
-                                                    binding.tvTodaySwubabLaunchContent.setText(
-                                                        menu_list.get(1)
-                                                    )
-                                                }
-
-                                                "스낵" -> {
-                                                    menu_list.put(3, content)
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+                    if ((result[num]?.type).equals("교직원")) {
+                        menuList.put(0, content)
+                    }
+                    when (result[num]?.corner) {
+                        "일품" -> {
+                            menuList.put(2, content)
                         }
-                    } else {
-                        Log.d("error", "실패한 응답")
+
+                        "한식" -> {
+                            menuList.put(1, content)
+                            binding.tvTodaySwubabLaunchContent.setText(
+                                menuList.get(1)
+                            )
+                        }
+
+                        "스낵" -> {
+                            menuList.put(3, content)
+                        }
                     }
                 }
-
-                override fun onFailure(call: Call<ResponseTodaySwubabDto>, t: Throwable) {
-                    t.message?.let { Log.d("error", it) } ?: "서버통신 실패"
-                }
-            })
+            } ?: run {
+                binding.layoutTodaySwubabLaunchBlank.layoutEmpty.visibility =
+                    View.VISIBLE
+            }
+        }
     }
 }
