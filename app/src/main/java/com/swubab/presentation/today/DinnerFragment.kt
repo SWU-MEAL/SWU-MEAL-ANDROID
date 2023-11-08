@@ -26,9 +26,9 @@ class DinnerFragment : BindingFragment<FragmentDinnerBinding>(R.layout.fragment_
                     View.GONE
                 var content = ""
                 for (i in 0 until result.items.size) {
-                    content = content + result.items[i].toString() + NEW_LINE
+                    content = content + result.items[i] + NEW_LINE
                 }
-                binding.tvTodaySwubabDinnerContent.setText(content)
+                binding.tvTodaySwubabDinnerContent.text = content
             } ?: run {
                 binding.layoutTodaySwubabDinnerBlank.layoutEmpty.visibility =
                     View.VISIBLE

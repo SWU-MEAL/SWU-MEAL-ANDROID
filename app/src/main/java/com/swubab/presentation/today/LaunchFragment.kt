@@ -20,22 +20,22 @@ class LaunchFragment : BindingFragment<FragmentLaunchBinding>(R.layout.fragment_
     }
 
     private fun radioButtonChecked() {
-        binding.rgTodaySwubabConner.setOnCheckedChangeListener { group, checkId ->
+        binding.rgTodaySwubabConner.setOnCheckedChangeListener { _, checkId ->
             when (checkId) {
                 R.id.rb_today_swubab_conner_snack -> {
-                    binding.tvTodaySwubabLaunchContent.setText(menuList[3])
+                    binding.tvTodaySwubabLaunchContent.text = menuList[3]
                 }
 
                 R.id.rb_today_swubab_conner_staff -> {
-                    binding.tvTodaySwubabLaunchContent.setText(menuList[0])
+                    binding.tvTodaySwubabLaunchContent.text = menuList[0]
                 }
 
                 R.id.rb_today_swubab_conner_korea -> {
-                    binding.tvTodaySwubabLaunchContent.setText(menuList[1])
+                    binding.tvTodaySwubabLaunchContent.text = menuList[1]
                 }
 
                 R.id.rb_today_swubab_conner_first -> {
-                    binding.tvTodaySwubabLaunchContent.setText(menuList[2])
+                    binding.tvTodaySwubabLaunchContent.text = menuList[2]
                 }
             }
 
@@ -51,28 +51,25 @@ class LaunchFragment : BindingFragment<FragmentLaunchBinding>(R.layout.fragment_
                     View.INVISIBLE
                 for (num in result.indices) {
                     var content = ""
-                    for (i in 0 until result[num]!!.items!!.size) {
-                        content = content + result[num]!!.items?.get(i)
-                            .toString() + NEW_LINE
+                    for (i in 0 until result[num].items.size) {
+                        content = content + result[num].items[i] + NEW_LINE
                     }
 
-                    if ((result[num]?.type).equals(STAFF)) {
-                        menuList.put(0, content)
+                    if ((result[num].type) == STAFF) {
+                        menuList[0] = content
                     }
-                    when (result[num]?.corner) {
+                    when (result[num].corner) {
                         JAPANESE -> {
-                            menuList.put(2, content)
+                            menuList[2] = content
                         }
 
                         KOREA -> {
-                            menuList.put(1, content)
-                            binding.tvTodaySwubabLaunchContent.setText(
-                                menuList.get(1)
-                            )
+                            menuList[1] = content
+                            binding.tvTodaySwubabLaunchContent.text = menuList[1]
                         }
 
                         SNACK -> {
-                            menuList.put(3, content)
+                            menuList[3] = content
                         }
                     }
                 }

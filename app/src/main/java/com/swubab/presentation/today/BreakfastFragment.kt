@@ -27,7 +27,7 @@ class BreakfastFragment : BindingFragment<FragmentBreakfastBinding>(R.layout.fra
                 var content = ""
                 for (i in 0 until result.items.size) {
                     content =
-                        content + result.items[i].toString() + NEW_LINE
+                        content + result.items[i] + NEW_LINE
                 }
                 binding.tvTodaySwubabBreakfastContent.text = content
 
