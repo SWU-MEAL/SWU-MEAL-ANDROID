@@ -36,7 +36,10 @@ class WeekSwubabFragment :
 
     private fun checkWeekday() {
         val todayCalendar = Calendar.getInstance()
-        if (todayCalendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
+        if (todayCalendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || todayCalendar.get(
+                Calendar.DAY_OF_WEEK
+            ) == Calendar.SUNDAY
+        ) {
             with(binding) {
                 layoutMorningEmpty.layoutEmpty.visibility = View.VISIBLE
                 layoutLunchEmpty.layoutEmpty.visibility = View.VISIBLE
