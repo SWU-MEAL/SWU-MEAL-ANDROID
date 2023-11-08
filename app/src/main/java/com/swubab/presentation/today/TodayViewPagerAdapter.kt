@@ -4,13 +4,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.swubab.R
-import com.swubab.databinding.FragmentTodaySwubabBinding
 
-private const val NUM_TABS = 3
 
-class TodayViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle):
-    FragmentStateAdapter(fragmentManager, lifecycle){
+class TodayViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
+    FragmentStateAdapter(fragmentManager, lifecycle) {
     override fun getItemCount(): Int {
         return NUM_TABS
     }
@@ -23,5 +20,9 @@ class TodayViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecyc
         }
 
         return BreakfastFragment()
+    }
+
+    companion object {
+        private const val NUM_TABS = 3
     }
 }

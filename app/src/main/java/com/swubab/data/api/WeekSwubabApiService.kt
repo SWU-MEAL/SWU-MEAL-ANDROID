@@ -6,8 +6,14 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface WeekSwubabApiService {
-    @GET("/v1/menu")
+    companion object {
+        const val V1 = "v1"
+        const val MENU = "menu"
+        const val DATE = "date"
+    }
+
+    @GET("/$V1/$MENU")
     suspend fun getWeekSwubab(
-        @Query(value = "date") date: String
+        @Query(value = DATE) date: String
     ): BaseResponseNullable<ResponseWeekSwuBabDto>
 }
