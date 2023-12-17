@@ -11,8 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_fill_white_10_rec"
-        android:paddingVertical="24dp"
-        android:visibility="invisible">
+        android:paddingVertical="24dp">
 
         <ImageView
             android:id="@+id/empty_icon"

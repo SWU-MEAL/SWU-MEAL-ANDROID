@@ -16,6 +16,7 @@ class MypageFragment : com.swubab.coreui.base.BindingFragment<FragmentMyPageBind
             val intent = Intent(context, MyVersionActivity::class.java)
             startActivity(intent)
         }
+        
         setEventOnMyTerms()
         setEventOnPrivacyPolicy()
     }
