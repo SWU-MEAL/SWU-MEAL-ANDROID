@@ -21,6 +21,9 @@ class WeekSwubabFragment :
     lateinit var lunchJapaneseMenuText: String
     lateinit var lunchSnackMenuText: String
     lateinit var lunchStaffMenuText: String
+    lateinit var morningMenuText: String
+    lateinit var dinnerMenuText: String
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -108,12 +111,56 @@ class WeekSwubabFragment :
                     layoutDinnerEmpty.layoutEmpty.visibility = View.INVISIBLE
                 }
 
-                val morningMenuText = buildMenuText(it.result[0].menuList[0].items)
-                lunchKoreaMenuText = buildMenuText(it.result[1].menuList[0].items)
-                lunchJapaneseMenuText = buildMenuText(it.result[1].menuList[1].items)
-                lunchSnackMenuText = buildMenuText(it.result[1].menuList[2].items)
-                lunchStaffMenuText = buildMenuText(it.result[1].menuList[3].items)
-                val dinnerMenuText = buildMenuText(it.result[2].menuList[0].items)
+//                val morningMenuText = buildMenuText(it.result[0].menuList[0].items)
+//                lunchKoreaMenuText = buildMenuText(it.result[1].menuList[0].items)
+//                lunchJapaneseMenuText = buildMenuText(it.result[1].menuList[1].items)
+//                lunchSnackMenuText = buildMenuText(it.result[1].menuList[2].items)
+//                lunchStaffMenuText = buildMenuText(it.result[1].menuList[3].items)
+//                val dinnerMenuText = buildMenuText(it.result[2].menuList[0].items)
+
+                if (it.result.isNotEmpty()) {
+                    val morningMenu =
+                        it.result.find { menu -> menu.time == "조식" }?.menuList?.getOrNull(0)
+                    if (morningMenu != null && morningMenu.items.isNotEmpty()) {
+                        morningMenuText = buildMenuText(morningMenu.items)
+                    } else {
+                        // 조식이 없는 경우에 대한 처리
+                        binding.tvWeekMorningDetail.text = DUMMY
+                        binding.layoutMorningEmpty.layoutEmpty.visibility = View.VISIBLE
+                    }
+
+                    val lunchMenu = it.result.find { menu -> menu.time == "중식" }
+                    if (lunchMenu != null) {
+                        val koreaMenu = lunchMenu.menuList.find { it.corners == "한식" }
+                        val japaneseMenu = lunchMenu.menuList.find { it.corners == "일품" }
+                        val snackMenu = lunchMenu.menuList.find { it.corners == "스낵" }
+                        val staffMenu = lunchMenu.menuList.find { it.type == "교직원" }
+
+                        lunchKoreaMenuText = buildMenuText(koreaMenu?.items ?: emptyList())
+                        lunchJapaneseMenuText = buildMenuText(japaneseMenu?.items ?: emptyList())
+                        lunchSnackMenuText = buildMenuText(snackMenu?.items ?: emptyList())
+                        lunchStaffMenuText = buildMenuText(staffMenu?.items ?: emptyList())
+                    } else {
+                        // 중식이 없는 경우에 대한 처리
+                        binding.tvWeekLunchDetail.text = DUMMY
+                        lunchKoreaMenuText = DUMMY
+                        lunchJapaneseMenuText = DUMMY
+                        lunchSnackMenuText = DUMMY
+                        lunchStaffMenuText = DUMMY
+                        binding.layoutLunchEmpty.layoutEmpty.visibility = View.VISIBLE
+                    }
+
+                    val dinnerMenu =
+                        it.result.find { menu -> menu.time == "석식" }?.menuList?.getOrNull(0)
+                    if (dinnerMenu != null && dinnerMenu.items.isNotEmpty()) {
+                        dinnerMenuText = buildMenuText(dinnerMenu.items)
+                    } else {
+                        // 석식이 없는 경우에 대한 처리
+                        binding.tvWeekDinnerDetail.text = DUMMY
+                        binding.layoutDinnerEmpty.layoutEmpty.visibility = View.VISIBLE
+                    }
+                }
+
 
                 with(binding) {
                     val selectedMenuText =
